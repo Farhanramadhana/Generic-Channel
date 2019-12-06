@@ -34,16 +34,19 @@ sendMessage(data) {
     let options = {
       method: 'POST',
       uri:
-        'https://kanal.kata.ai/receive_message/<your_webhook>',
+        '<enter_your_webhook_here>',
       json: true,
-      body: [
-        {
-          "type": data.messages[0].type,
-          "content": data.messages[0].content,
-        },
-      ],
-    };
-
+      body: {
+        "userId": data.userId,
+        "messages":[
+          {
+            "type": data.messages[0].type,
+            "content": data.messages[0].content
+          }
+        ]
+      }
+    }
+    
     return rp(options)
       .then(function (parsedBody){
           data = {
@@ -58,5 +61,6 @@ sendMessage(data) {
             "messages" : err
           }
           return data
-      })
+      }) 
+  }
 ```
