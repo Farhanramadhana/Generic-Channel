@@ -7,16 +7,19 @@ export class AppService {
     let options = {
       method: 'POST',
       uri:
-        'https://kanal.kata.ai/receive_message/48d8b0f1-6839-48f2-8aeb-111a98e76dac',
+        '<enter_your_webhook_here>',
       json: true,
-      body: [
-        {
-          "type": data.messages[0].type,
-          "content": data.messages[0].content,
-        },
-      ],
-    };
-
+      body: {
+        "userId": data.userId,
+        "messages":[
+          {
+            "type": data.messages[0].type,
+            "content": data.messages[0].content
+          }
+        ]
+      }
+    }
+    
     return rp(options)
       .then(function (parsedBody){
           data = {
@@ -31,7 +34,6 @@ export class AppService {
             "messages" : err
           }
           return data
-      })
-    
+      }) 
   }
 }
